@@ -14,7 +14,7 @@ const char nl = '\n';
 
 int k, h, w;
 int board[205][205]; // h, w
-int dist[205][205][1];
+int dist[205][205][30];
 int kdx[] = {1, 2, 2, 1, -1, -2, -2, -1};
 int kdy[] = {2, 1, -1, -2, -2, -1, 1, 2};
 int dx[] = {1, 0, -1, 0};
@@ -38,7 +38,7 @@ void solve() {
     }
 
     queue<pi> q;
-    dist[0][0][1] = 0;
+    dist[0][0][0] = 0;
     q.push({0, 0});
     while (!q.empty()) {
         auto cur = q.front(); q.pop();
