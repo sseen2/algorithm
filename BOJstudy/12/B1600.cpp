@@ -70,6 +70,8 @@ void solve() {
         }
     }
 
+    print1();
+
     cout << dist[h - 1][w - 1];
 }
 
