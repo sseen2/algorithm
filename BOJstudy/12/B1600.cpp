@@ -2,8 +2,6 @@
 using namespace std;
 #define all(x) x.begin(), x.end()
 #define ll long long
-// #define X first
-// #define Y second
 #define X get<0>
 #define Y get<1>
 #define Z get<2>
