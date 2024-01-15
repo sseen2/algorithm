@@ -2,9 +2,6 @@
 using namespace std;
 #define all(x) x.begin(), x.end()
 #define ll long long
-#define X get<0>
-#define Y get<1>
-#define Z get<2>
 
 typedef pair<int, int> pi;
 typedef pair<ll,ll> pl;
@@ -13,28 +10,30 @@ typedef vector<ll> vl;
 
 const char nl = '\n';
 
-int k, h, w;
-int board[205][205]; // h, w
-int dist[205][205][2]; // 0: 말로 움직일 수 있음, 1: 말로 움직일 수 없음 
-int kdx[] = {1, 2, 2, 1, -1, -2, -2, -1};
-int kdy[] = {2, 1, -1, -2, -2, -1, 1, 2};
+int k, w, h;
+int board[205][205];
+int dist[205][205][2];
 int dx[] = {1, 0, -1, 0};
 int dy[] = {0, 1, 0, -1};
+int hx[] = {-1, -2, -2, -1, 1, 2, 2, 1};
+int hy[] = {2, 1, -1, -2, -2, -1, 1, 2};
 
-void print1() {
+void print() {
     for (int i = 0; i < h; i++) {
-        for (int j = 0; j < w; j++)
+        for (int j = 0; j < w; j++) {
             cout << dist[i][j][0] << " ";
+        }
         cout << nl;
     }
-}
+    cout << nl;
 
-void print2() {
     for (int i = 0; i < h; i++) {
-        for (int j = 0; j < w; j++)
+        for (int j = 0; j < w; j++) {
             cout << dist[i][j][1] << " ";
+        }
         cout << nl;
     }
+    cout << nl;
 }
 
 void solve() {
@@ -47,28 +46,46 @@ void solve() {
         }
     }
 
-    queue<tuple<int,int,int>> q;
+    queue<tuple<int, int, int>> q;
+    q.push({0, 0, k});
     dist[0][0][0] = 0;
-    q.push(make_tuple(0, 0, k));
     while (!q.empty()) {
-        auto cur = q.front(); q.pop();
-        int x,y,z;
-        tie(x,y,z) = cur;
-        int horse = Z(cur);
-        if (horse > 0) {
-            
+        int x, y, z;
+        tie(x, y, z) = q.front(); q.pop();
+        if (z > 0) {
+            for (int dir = 0; dir < 8; dir++) {
+                int nx = x + hx[dir];
+                int ny = y + hy[dir];
+                if (nx < 0 || nx >= h || ny < 0 || ny >= w) continue;
+                if (board[nx][ny] == 1 || dist[nx][ny][0] != -1) continue;
+                q.push({nx, ny, z - 1});
+                dist[nx][ny][0] = dist[x][y][0] + 1;
+            }
         }
-        for (int i = 0; i < 8; i++) {
-            int nx = kdx[i] + X(cur);
-            int ny = kdy[i] + Y(cur);
+        for (int dir = 0; dir < 4; dir++) {
+            int nx = x + dx[dir];
+            int ny = y + dy[dir];
             if (nx < 0 || nx >= h || ny < 0 || ny >= w) continue;
-            if (dist[nx][ny] > -1 || board[nx][ny] == 1) continue;
-            dist[nx][ny] = dist[cur.X][cur.Y] + 1;
-            q.push({nx, ny});
+            if (board[nx][ny] == 1 || dist[nx][ny][0] != -1) continue;
+            if (z > 0) {
+                q.push({nx, ny, z});
+                dist[nx][ny][0] = dist[x][y][0] + 1;
+            }
+            else if (z == 0) {
+                q.push({nx, ny, -1});
+                dist[nx][ny][1] = dist[x][y][0] + 1;
+            }
+            else {
+                q.push({nx, ny, z});
+                dist[nx][ny][1] = dist[x][y][1] + 1;
+            } 
         }
     }
+    int a = dist[h - 1][w - 1][0], b = dist[h - 1][w - 1][1];
 
-    cout << dist[h - 1][w - 1];
+    if (a != -1) cout << a;
+    else cout << b;
+
 }
 
 int main() {
