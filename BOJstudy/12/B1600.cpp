@@ -18,24 +18,6 @@ int dy[] = {0, 1, 0, -1};
 int hx[] = {-1, -2, -2, -1, 1, 2, 2, 1};
 int hy[] = {2, 1, -1, -2, -2, -1, 1, 2};
 
-void print() {
-    for (int i = 0; i < h; i++) {
-        for (int j = 0; j < w; j++) {
-            cout << dist[i][j][0] << " ";
-        }
-        cout << nl;
-    }
-    cout << nl;
-
-    for (int i = 0; i < h; i++) {
-        for (int j = 0; j < w; j++) {
-            cout << dist[i][j][1] << " ";
-        }
-        cout << nl;
-    }
-    cout << nl;
-}
-
 void solve() {
     cin >> k >> w >> h;
     for (int i = 0; i < h; i++) {
@@ -51,7 +33,15 @@ void solve() {
     while (!q.empty()) {
         int x, y, z;
         tie(x, y, z) = q.front(); q.pop();
-        if (z > 0) {
+        for (int dir = 0; dir < 4; dir++) {
+            int nx = x + dx[dir];
+            int ny = y + dy[dir];
+            if (nx < 0 || nx >= h || ny < 0 || ny >= w) continue;
+            if (board[nx][ny] == 1 || dist[nx][ny][z] != -1) continue;
+            q.push({nx, ny, z});
+            dist[nx][ny][z] = dist[x][y][z] + 1;
+        }
+        if (z != 0) {
             for (int dir = 0; dir < 8; dir++) {
                 int nx = x + hx[dir];
                 int ny = y + hy[dir];
@@ -61,20 +51,16 @@ void solve() {
                 dist[nx][ny][z - 1] = dist[x][y][z] + 1;
             }
         }
-        for (int dir = 0; dir < 4; dir++) {
-            int nx = x + dx[dir];
-            int ny = y + dy[dir];
-            if (nx < 0 || nx >= h || ny < 0 || ny >= w) continue;
-            if (board[nx][ny] == 1 || dist[nx][ny][z] != -1) continue;
-            q.push({nx, ny, z});
-            dist[nx][ny][z] = dist[x][y][z] + 1;
-        }
     }
-    int a = dist[h - 1][w - 1][0], b = dist[h - 1][w - 1][1];
+    
+    int mn = 1000000000;
+    for (int i = 0; i < k; i++) {
+        if (dist[h - 1][w - 1][i] == -1) continue;
+        mn = min(mn, dist[h - 1][w - 1][i]);
+    }
 
-    if (a != -1) cout << a;
-    else cout << b;
-
+    if (mn == 1000000000) mn = -1;
+    cout << mn;
 }
 
 int main() {
