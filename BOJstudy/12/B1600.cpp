@@ -54,7 +54,7 @@ void solve() {
     }
     
     int mn = 1000000000;
-    for (int i = 0; i < k; i++) {
+    for (int i = 0; i <= k; i++) {
         if (dist[h - 1][w - 1][i] == -1) continue;
         mn = min(mn, dist[h - 1][w - 1][i]);
     }
