@@ -39,7 +39,7 @@ void solve() {
     for (int i = 0; i < 3; i++) fill(dp[i], dp[i] + N, -1);
     pre[0] = t[0];
     for (int i = 1; i < n; i++) {
-        pre[i] += pre[i - 1] + t[i];
+        pre[i] = pre[i - 1] + t[i];
     }
 
     cout << func(0, 0);
