@@ -22,8 +22,7 @@ void solve() {
     for (int i = 0; i < n; i++) cin >> arr[i];
     sum[0] = arr[0];
     for (int i = 0; i < n; i++) sum[i] = max(arr[i], sum[i - 1] + arr[i]);
-    for (int i = 0; i < n; i++) mx = max(mx, sum[i]);
-    cout << mx;
+    cout << *max_element(sum, sum + n);
 }
 
 int main() {
