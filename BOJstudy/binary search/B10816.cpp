@@ -45,6 +45,10 @@ void solve() {
     while (m--) {
         int num; cin >> num;
         cout << upper_idx(num) - lower_idx(num) << " ";
+        
+        // STL을 이용한 코드
+        // * 무조건 정렬 되어 있을 때 사용할 것
+        // cout << upper_bound(arr, arr + n, num) - lower_bound(arr, arr + n, num) << " ";
     }
 }
 
