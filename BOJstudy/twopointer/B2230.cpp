@@ -31,6 +31,12 @@ void solve() {
         }
     }
 
+    // for (st = 0; st < n; st++) {
+    //     while (en < n && a[en] - a[st] < m) en++;
+    //     if (en == n) break;
+    //     mn = min(mn, a[en] - a[st]);
+    // }
+
     cout << mn;
 }
 
