@@ -22,9 +22,10 @@ void solve() {
         }
         else if (q == 2) {
             int x; cin >> x;
-            d += x;
-            if (d > n) d %= n;
-            if (d == 0) d = n;
+            d = (d + x - 1) % n + 1;
+            // d += x;
+            // if (d > n) d %= n;
+            // if (d == 0) d = n;
         }
         else if (q == 3) {
             auto it = p.lower_bound(d);
