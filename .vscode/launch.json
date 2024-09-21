@@ -5,21 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "g++.exe - 활성 파일 빌드 및 디버그",
             "type": "cppdbg",
-            "preLaunchTask": "clang++ build active file",
             "request": "launch",
-            "name": "Debug",
-            // TODO: 실행파일수정
-            "program": "/home/sjchoi/project/build/bin/http_test",
-            // TODO: 실행 옵션 수정
-            "args": [ 
-                "--gtest_filter=store.*" 
-            ],
-            "cwd": "${workspaceFolder}",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "args": ["1 args ","2 args "],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
             "environment": [],
-            "externalConsole": true,
+            "externalConsole": false,
             "MIMode": "gdb",
-            // "stopAtEntry": true,
+            "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe",
             "setupCommands": [
                 {
                     "description": "gdb에 자동 서식 지정 사용",
@@ -27,7 +23,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "miDebuggerPath": "/bin/gdb"
-        }
+            "preLaunchTask": "C/C++: g++.exe 활성 파일 빌드"
+        },    
     ]
 }

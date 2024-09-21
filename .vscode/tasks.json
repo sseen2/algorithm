@@ -11,7 +11,6 @@
             "label": "save and compile for C++",
             "command": "g++",
             "args": [
-                "-Wall",
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
@@ -36,7 +35,6 @@
             "label": "save and compile for C",
             "command": "gcc",
             "args": [
-                "-Wall",
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
@@ -60,18 +58,38 @@
         {
             "label": "execute",
             "command": "cmd",
-            "group": "test",
+            "group": "build",
             "args": [
                 "/C",
                 "${fileDirname}\\${fileBasenameNoExtension}"
-            ]
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc.exe 활성 파일 빌드",
+            "command": "C:\\MinGW\\bin\\gcc.exe",
+            "args": [
+                "-g",
+                "-lm",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "디버거에서 생성된 작업입니다."
         },
         {
             "type": "cppbuild",
             "label": "C/C++: g++.exe 활성 파일 빌드",
             "command": "C:\\MinGW\\bin\\g++.exe",
             "args": [
-                "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
                 "-o",
@@ -84,7 +102,7 @@
                 "$gcc"
             ],
             "group": "build",
-            "detail": "컴파일러: C:\\MinGW\\bin\\g++.exe"
+            "detail": "디버거에서 생성된 작업입니다."
         }
     ]
 }
