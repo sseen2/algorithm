@@ -9,16 +9,6 @@ int t[N];
 int sum[N];
 int d[N][N];
 
-void printd() {
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= n; j++) {
-            cout << d[i][j] << " ";
-        }
-        cout << nl;
-    }
-    cout << nl;
-}
-
 void solve() {
     cin >> n >> m >> r;
     for (int i = 1; i <= n; i++) cin >> t[i];
@@ -34,8 +24,6 @@ void solve() {
             for (int j = 1; j <= n; j++) 
                 if (d[i][j] > d[i][h] + d[h][j]) 
                     d[i][j] = d[i][h] + d[h][j], d[j][i] = d[j][h] + d[h][i];
-                
-    // printd();
 
     for (int i = 1; i <= n; i++) 
         for (int j = 1; j <= n; j++) 

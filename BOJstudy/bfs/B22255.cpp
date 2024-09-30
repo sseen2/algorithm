@@ -38,7 +38,7 @@ void solve() {
     }
 
     int a = dist[0][ex][ey], b = dist[1][ex][ey], c = dist[2][ex][ey];
-    if (a == MX && a == b && a == c) cout << -1;
+    if (a == MX && b == MX && c == MX) cout << -1;
     else cout << min(a, min(b , c));
 }
 
